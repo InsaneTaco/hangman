@@ -23,7 +23,7 @@ limb_lost = {
     1: "your head",
     2: "your torso",
     3: "your arm",
-    4: "another arm for me stew",
+    4: "another arm FOR MY STEW",
     5: "your leg"
 }
 
@@ -50,12 +50,13 @@ for i in range(len(word)):
 print_board()
 
 
-
 # main game loop
 while True:
     turn_count += 1
     word_ch_spot = -1
+    correct_check = 0
     matches_found = False
+    underscores_left = False
 
     guess = input("\nguess: ").upper()
     # checks if the player won
@@ -81,5 +82,12 @@ while True:
                 sys.exit()
             else:
                 print("Wrong! There goes " + limb_lost.get(wrong_guesses) + "!")
-                    
+
+    # checks for a different type of win                
     print_board()
+    for word_board_ch in word_board_list:
+        if word_board_ch != "_":
+            correct_check += 1
+            if len(word_board_list) == correct_check:
+                print("Let's go, you got the word! You may live.")
+                sys.exit()
